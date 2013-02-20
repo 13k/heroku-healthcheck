@@ -15,6 +15,7 @@ module HealthCheckers::Memcache
 
   def check_memcache_server(server, provider)
     require 'dalli'
+    Dalli.logger.level = Logger::WARN
     username = api.get_config_vars(app).body["#{provider}_USERNAME"]
     password = api.get_config_vars(app).body["#{provider}_PASSWORD"]
     memcache_client = Dalli::Client.new server, username: username, password: password, failover: false
