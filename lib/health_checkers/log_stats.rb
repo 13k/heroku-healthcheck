@@ -26,7 +26,7 @@ module HealthCheckers::LogStats
 
   def render_count(type, number, lines)
     percent = (number / 1.0) / lines * 100
-    display("#{type} errors: #{number} (#{percent}%)")
+    display("#{type} errors: #{number} (%.2f%%)" % percent)
   end
 
   def analyse_for_errors(output)
