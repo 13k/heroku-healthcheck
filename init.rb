@@ -8,6 +8,8 @@ class Heroku::Command::HealthCheck < Heroku::Command::Base
   include HealthCheckers::Processes
   include HealthCheckers::Releases
   include HealthCheckers::LogStats
+  include HealthCheckers::Redis
+  include HealthCheckers::Memcache
 
   # healthcheck
   #
@@ -31,6 +33,14 @@ class Heroku::Command::HealthCheck < Heroku::Command::Base
 
     styled_header("Analyzing recent log entries")
     get_log_stats(app)
+    display("")
+
+    styled_header("Checking memcache providers")
+    check_memcache(app)
+    display("")
+
+    styled_header("Checking redis providers")
+    check_redis(app)
     display("")
 
   end
