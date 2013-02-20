@@ -1,16 +1,13 @@
 $:.unshift File.expand_path("../lib", __FILE__)
 require 'uri'
 require 'net/http'
-require 'dns_checker.rb'
-require 'processes.rb'
-require 'releases.rb'
-require 'log_stats.rb'
+require 'health_checkers'
 
 class Heroku::Command::HealthCheck < Heroku::Command::Base
-  include DnsChecker
-  include Processes
-  include Releases
-  include LogStats
+  include HealthCheckers::DnsChecker
+  include HealthCheckers::Processes
+  include HealthCheckers::Releases
+  include HealthCheckers::LogStats
 
   # healthcheck
   #
@@ -30,11 +27,11 @@ class Heroku::Command::HealthCheck < Heroku::Command::Base
 
     styled_header("Recent Releases")
     get_releases(app)
-    display ""
+    display("")
 
     styled_header("Analyzing recent log entries")
     get_log_stats(app)
-    display ""
+    display("")
 
   end
 

@@ -1,4 +1,4 @@
-module Processes
+module HealthCheckers::Processes
   def get_processes(app)
     validate_arguments!
     processes = api.get_ps(app).body

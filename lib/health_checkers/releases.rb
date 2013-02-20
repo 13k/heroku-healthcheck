@@ -1,4 +1,4 @@
-module Releases
+module HealthCheckers::Releases
 
   def get_releases(app)
     validate_arguments!

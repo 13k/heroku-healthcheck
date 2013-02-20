@@ -1,4 +1,4 @@
-module DnsChecker
+module HealthCheckers::DnsChecker
 
   def check_domains(app)
     domains = api.get_domains(app).body
